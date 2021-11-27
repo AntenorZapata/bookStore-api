@@ -7,26 +7,28 @@ interface IRequest {
 	name: string;
 	price: number;
 	quantity: number;
+	id: string;
 }
 
-class CreateBookService {
-	public async execute({ name, price, quantity }: IRequest): Promise<Book> {
+export default class UpdateBookService {
+	public async execute({ id, name, price, quantity }: IRequest): Promise<Book> {
 		const booksRepository = getCustomRepository(BookRepository);
+
+		const book = await booksRepository.findOne(id);
+
+		if (!book) {
+			throw new AppError('Book does not exist', 404);
+		}
+
 		const bookExists = await booksRepository.findByName(name);
 
 		if (bookExists) {
-			throw new AppError('There is already a book with this name', 400);
+			throw new AppError('There is already a book with that name', 400);
 		}
 
-		const book = booksRepository.create({
-			name,
-			price,
-			quantity,
-		});
-
+		await booksRepository.update(id, { name, price, quantity });
 		await booksRepository.save(book);
+
 		return book;
 	}
 }
-
-export default CreateBookService;

@@ -3,9 +3,9 @@ import Book from '../typeorm/entities/Book';
 import { BookRepository } from '../typeorm/repositories/BooksRepository';
 
 class GetBooksService {
-	public execute(): Promise<Book[]> {
+	public async execute(): Promise<Book[]> {
 		const booksRepository = getCustomRepository(BookRepository);
-		const books = booksRepository.find();
+		const books = await booksRepository.find();
 		return books;
 	}
 }
