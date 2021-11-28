@@ -1,9 +1,10 @@
+import BooksController from '@modules/books/controllers/BooksController';
 import { Router } from 'express';
 
 const routes = Router();
 
-routes.route('/').get((req, res) => {
-	return res.status(200).json({ message: 'Hello Dev' });
-});
+const booksController = new BooksController();
+
+routes.route('/books').get(booksController.getAll);
 
 export default routes;

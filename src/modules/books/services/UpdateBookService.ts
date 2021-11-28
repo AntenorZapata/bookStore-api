@@ -26,14 +26,13 @@ export default class UpdateBookService {
 			throw new AppError('There is already a book with that name', 400);
 		}
 
-		// await booksRepository.update(id, { name, price, quantity });
-		await booksRepository.update({ name, price, quantity }, { id });
+		await booksRepository.update({ id }, { name, price, quantity });
 
 		// book.name = name;
 		// book.price = price;
 		// book.quantity = quantity;
 
-		await booksRepository.save(book);
+		// await booksRepository.save(book);
 
 		return book;
 	}
