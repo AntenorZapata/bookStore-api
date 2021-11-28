@@ -20,7 +20,9 @@ export default class BooksController {
 
 	public async create(req: Request, res: Response): Promise<Response> {
 		const createBook = new CreateBookService();
-		const newBook = await createBook.execute(req.body);
-		return res.status(200).json(newBook);
+		const { name, price, quantity } = req.body;
+
+		const newBook = await createBook.execute({ name, price, quantity });
+		return res.status(201).json(newBook);
 	}
 }
