@@ -6,5 +6,6 @@ const routes = Router();
 const booksController = new BooksController();
 
 routes.route('/books').get(booksController.getAll);
+routes.route('/books/:id').get(booksController.getById);
 
 export default routes;
