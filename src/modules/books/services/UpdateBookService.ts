@@ -22,17 +22,11 @@ export default class UpdateBookService {
 
 		const bookExists = await booksRepository.findByName(name);
 
-		if (bookExists && id !== book.id) {
+		if (bookExists && bookExists.id !== book.id) {
 			throw new AppError('There is already a book with that name', 400);
 		}
 
 		await booksRepository.update({ id }, { name, price, quantity });
-
-		// book.name = name;
-		// book.price = price;
-		// book.quantity = quantity;
-
-		// await booksRepository.save(book);
 
 		return book;
 	}

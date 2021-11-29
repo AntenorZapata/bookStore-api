@@ -1,7 +1,9 @@
 import { Request, Response } from 'express';
 import CreateBookService from '../services/CreateBookService';
+import DeleteBookService from '../services/DeleteBookService';
 import GetBooksService from '../services/GetBooksService';
 import GetOneBookService from '../services/GetOneBookService';
+import UpdateBookService from '../services/UpdateBookService';
 // import Book from '../typeorm/entities/Book';
 
 export default class BooksController {
@@ -21,8 +23,22 @@ export default class BooksController {
 	public async create(req: Request, res: Response): Promise<Response> {
 		const createBook = new CreateBookService();
 		const { name, price, quantity } = req.body;
-
 		const newBook = await createBook.execute({ name, price, quantity });
 		return res.status(201).json(newBook);
+	}
+
+	public async update(req: Request, res: Response): Promise<Response> {
+		const updateBook = new UpdateBookService();
+		const { name, price, quantity } = req.body;
+		const { id } = req.params;
+		const updatedBook = await updateBook.execute({ id, name, price, quantity });
+		return res.status(200).json(updatedBook);
+	}
+
+	public async delete(req: Request, res: Response): Promise<Response> {
+		const deletedBoook = new DeleteBookService();
+		const { id } = req.params;
+		await deletedBoook.execute({ id });
+		return res.status(200).json({ status: 'success', message: 'Book deleted' });
 	}
 }

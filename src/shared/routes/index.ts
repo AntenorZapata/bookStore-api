@@ -6,6 +6,10 @@ const routes = Router();
 const booksController = new BooksController();
 
 routes.route('/books').get(booksController.getAll).post(booksController.create);
-routes.route('/books/:id').get(booksController.getById);
+routes
+	.route('/books/:id')
+	.get(booksController.getById)
+	.put(booksController.update)
+	.delete(booksController.delete);
 
 export default routes;

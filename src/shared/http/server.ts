@@ -1,8 +1,9 @@
 import 'reflect-metadata';
+import 'express-async-errors';
 import express from 'express';
 import cors from 'cors';
-import routes from '../routes';
 import error from '../middlewares/error';
+import routes from '../routes';
 import '@shared/typeorm';
 
 const app = express();
