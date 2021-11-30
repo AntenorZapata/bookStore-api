@@ -1,24 +1,11 @@
-import BooksController from '@modules/books/controllers/BooksController';
-import BookValidator from '@shared/middlewares/BookValidator';
+import booksRouter from '@modules/books/routes/books.routes';
+import userRouter from '@modules/users/routes/users.routes';
+
 import { Router } from 'express';
 
 const routes = Router();
 
-const booksController = new BooksController();
-const validation = new BookValidator();
-
-routes
-	.route('/books')
-	.get(booksController.getAll)
-	.post(validation.validateBook(), booksController.create);
-routes
-	.route('/books/:id')
-	.get(validation.validateId(), booksController.getById)
-	.put(
-		validation.validateId(),
-		validation.validateBook(),
-		booksController.update,
-	)
-	.delete(validation.validateId(), booksController.delete);
+routes.use('/books', booksRouter);
+routes.use('/users', userRouter);
 
 export default routes;
