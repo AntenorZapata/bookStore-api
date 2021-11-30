@@ -4,7 +4,6 @@ import DeleteBookService from '../services/DeleteBookService';
 import GetBooksService from '../services/GetBooksService';
 import GetOneBookService from '../services/GetOneBookService';
 import UpdateBookService from '../services/UpdateBookService';
-// import Book from '../typeorm/entities/Book';
 
 export default class BooksController {
 	public async getAll(req: Request, res: Response): Promise<Response> {
