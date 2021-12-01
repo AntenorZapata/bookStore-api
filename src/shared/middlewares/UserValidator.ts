@@ -18,4 +18,13 @@ export default class UserValidator {
 			},
 		});
 	}
+
+	public validateSessioData() {
+		return celebrate({
+			[Segments.BODY]: Joi.object().keys({
+				email: Joi.string().email().required(),
+				password: Joi.string().min(6).required(),
+			}),
+		});
+	}
 }
