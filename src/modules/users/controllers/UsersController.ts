@@ -2,6 +2,7 @@ import { GetUsersServices } from '../services/GetUsersService';
 import { Request, Response } from 'express';
 import CreateUserService from '../services/CreateUserService';
 import { GetOneUserService } from '../services/GetOneUserService';
+import CreateSessionService from '../services/CreateSessionService';
 
 export default class UsersController {
 	public async getAll(req: Request, res: Response): Promise<Response> {
@@ -21,5 +22,11 @@ export default class UsersController {
 		const createUser = new CreateUserService();
 		const user = await createUser.execute(req.body);
 		return res.status(201).json(user);
+	}
+
+	public async login(req: Request, res: Response): Promise<Response> {
+		const loginUser = new CreateSessionService();
+		const user = await loginUser.execute(req.body);
+		return res.status(200).json(user);
 	}
 }

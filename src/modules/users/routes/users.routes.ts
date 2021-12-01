@@ -13,6 +13,8 @@ userRouter
 	.route('/')
 	.get(userControler.getAll)
 	.post(userValidator.validateUser(), userControler.create);
+
+userRouter.route('/login').post(userControler.login);
 userRouter.route('/:id').get(userValidator.validateId(), userControler.getById);
 
 export default userRouter;
