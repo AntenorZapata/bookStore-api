@@ -6,6 +6,6 @@ const booksRouter = Router();
 
 const userControler = new UsersController();
 
-booksRouter.route('/').post(userControler.create);
+booksRouter.route('/').get(userControler.getAll).post(userControler.create);
 
 export default booksRouter;

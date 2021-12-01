@@ -1,8 +1,8 @@
 import AppError from '@shared/errors/AppError';
-import { Request, Response } from 'express';
 import { getCustomRepository } from 'typeorm';
+
 import User from '../typeorm/entities/User';
-import UserRepository from '../typeorm/repositories/UserRepository';
+import { UserRepository } from '../typeorm/repositories/UsersRepository';
 
 interface IRequest {
 	name: string;
