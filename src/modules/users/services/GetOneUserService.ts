@@ -11,6 +11,7 @@ export class GetOneUserService {
 		if (!user) {
 			throw new AppError('User does not exist', 404);
 		}
+
 		return user;
 	}
 }
