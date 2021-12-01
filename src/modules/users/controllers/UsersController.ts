@@ -1,6 +1,7 @@
-import { GetUsersServices } from './../services/GetUsersServices';
+import { GetUsersServices } from '../services/GetUsersService';
 import { Request, Response } from 'express';
 import CreateUserService from '../services/CreateUserService';
+import { GetOneUserService } from '../services/GetOneUserService';
 
 export default class UsersController {
 	public async getAll(req: Request, res: Response): Promise<Response> {
@@ -8,6 +9,14 @@ export default class UsersController {
 		const users = await usersService.execute();
 		return res.status(200).json(users);
 	}
+
+	public async getById(req: Request, res: Response): Promise<Response> {
+		const usersService = new GetOneUserService();
+		const { id } = req.params;
+		const user = await usersService.execute(id);
+		return res.status(200).json(user);
+	}
+
 	public async create(req: Request, res: Response): Promise<Response> {
 		const createUser = new CreateUserService();
 		const user = await createUser.execute(req.body);
